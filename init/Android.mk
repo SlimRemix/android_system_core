@@ -46,6 +46,10 @@ ifneq ($(TARGET_NR_SVC_SUPP_GIDS),)
 LOCAL_CFLAGS += -DNR_SVC_SUPP_GIDS=$(TARGET_NR_SVC_SUPP_GIDS)
 endif
 
+ifneq ($(TARGET_IGNORE_RO_BOOT_SERIALNO),)
+LOCAL_CFLAGS += -DIGNORE_RO_BOOT_SERIALNO
+endif
+
 LOCAL_MODULE:= init
 
 LOCAL_FORCE_STATIC_EXECUTABLE := true
@@ -61,12 +65,11 @@ LOCAL_STATIC_LIBRARIES := \
 	libselinux \
 	libmincrypt \
 	libext4_utils_static \
+	libext2_blkid \
 	libext2_uuid_static \
 	liblz4-static \
 	libsparse_static \
-	libz \
-	libext2_blkid \
-	libext2_uuid_static
+	libz
 
 LOCAL_ADDITIONAL_DEPENDENCIES += $(LOCAL_PATH)/Android.mk
 ifneq ($(strip $(TARGET_PLATFORM_DEVICE_BASE)),)
